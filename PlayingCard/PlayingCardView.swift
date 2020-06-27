@@ -12,9 +12,9 @@ import UIKit
 class PlayingCardView: UIView {
     
     @IBInspectable
-    var rank: Int = 5 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var rank: Int = 10 { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
-    var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    var suit: String = "🖤" { didSet { setNeedsDisplay(); setNeedsLayout() } }
     @IBInspectable
     var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
@@ -137,7 +137,8 @@ class PlayingCardView: UIView {
                 drawPips()
             }
         } else {
-            if let cardBackImage = UIImage(named: "cardback") {
+            if let cardBackImage = UIImage(named: "cardback", in: Bundle(for: self.classForCoder),
+            compatibleWith: traitCollection) {
                 cardBackImage.draw(in: bounds)
             }
         }
@@ -198,7 +199,7 @@ extension CGRect {
         return CGRect(x: minX, y: minY, width: width/2, height: height)
     }
     var rightHalf: CGRect {
-        return CGRect(x: minX, y: minY, width: width/2, height: height)
+        return CGRect(x: minX * 3, y: minY, width: width/2, height: height)
     }
     func inset(by size: CGSize) -> CGRect {
         return insetBy(dx: size.width, dy: size.height)
